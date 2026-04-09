@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sempreverde – Federico Galantucci</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --verde-profondo: #1a3a2a;
+    --verde-medio: #2d5c3f;
+    --verde-chiaro: #4a8c5e;
+    --verde-pallido: #8fbc8f;
+    --verde-menta: #c8e6c3;
+    --panna: #f5f0e8;
+    --oro: #c9a84c;
+    --oro-chiaro: #e8d08a;
+    --terra: #6b4c2a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--panna);
+    color: var(--verde-profondo);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 4rem;
+    background: rgba(245, 240, 232, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(26,58,42,0.1);
+    transition: all 0.4s;
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--verde-profondo);
+    letter-spacing: 0.02em;
+  }
+
+  .nav-logo span { color: var(--verde-chiaro); font-style: italic; }
+
+  .nav-links {
+    display: flex; gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--verde-profondo);
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+
+  .nav-links a:hover { opacity: 1; }
+
+  .nav-cta {
+    background: var(--verde-profondo);
+    color: var(--panna) !important;
+    padding: 0.6rem 1.5rem !important;
+    border-radius: 2px !important;
+    opacity: 1 !important;
+    transition: background 0.3s !important;
+  }
+
+  .nav-cta:hover { background: var(--verde-medio) !important; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 4rem 6rem 6rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--verde-chiaro);
+    margin-bottom: 2rem;
+  }
+
+  .hero-badge::before {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 1px;
+    background: var(--verde-chiaro);
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 7vw, 6rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--verde-profondo);
+    margin-bottom: 0.3em;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--verde-chiaro);
+    font-weight: 300;
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--verde-medio);
+    margin-bottom: 2.5rem;
+    line-height: 1.5;
+  }
+
+  .hero-desc {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--verde-profondo);
+    opacity: 0.7;
+    max-width: 420px;
+    margin-bottom: 3rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .btn-primary {
+    background: var(--verde-profondo);
+    color: var(--panna);
+    padding: 1rem 2.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    background: var(--verde-medio);
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--verde-profondo);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+
+  .btn-secondary:hover { opacity: 1; }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-img-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .hero-img-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #2d5c3f 0%, #1a3a2a 40%, #4a8c5e 100%);
+  }
+
+  .hero-botanical {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .leaf-art {
+    width: 80%;
+    height: 80%;
+    animation: floatLeaf 6s ease-in-out infinite;
+  }
+
+  @keyframes floatLeaf {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(1deg); }
+  }
+
+  .hero-year {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.08);
+    line-height: 1;
+    user-select: none;
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    background: var(--verde-profondo);
+    padding: 2.5rem 6rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stats-bar::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--oro), transparent, var(--oro));
+  }
+
+  .stat-item {
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    padding: 0.5rem 0;
+  }
+
+  .stat-item:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--oro-chiaro);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* SERVICES */
+  .section {
+    padding: 8rem 6rem;
+  }
+
+  .section-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 5rem;
+    align-items: end;
+  }
+
+  .section-tag {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--verde-chiaro);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .section-tag::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--verde-chiaro);
+    max-width: 40px;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--verde-profondo);
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--verde-chiaro);
+  }
+
+  .section-desc {
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: var(--verde-profondo);
+    opacity: 0.65;
+    padding-top: 1.5rem;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: rgba(26,58,42,0.08);
+  }
+
+  .service-card {
+    background: var(--panna);
+    padding: 3rem 2.5rem;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.4s;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--verde-chiaro);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s;
+  }
+
+  .service-card:hover::before { transform: scaleX(1); }
+
+  .service-card:hover {
+    background: #fff;
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(26,58,42,0.12);
+    z-index: 2;
+  }
+
+  .service-icon {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 1.5rem;
+    color: var(--verde-chiaro);
+  }
+
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--verde-chiaro);
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+  }
+
+  .service-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.7rem;
+    font-weight: 400;
+    color: var(--verde-profondo);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .service-text {
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: var(--verde-profondo);
+    opacity: 0.6;
+  }
+
+  /* ABOUT */
+  .about-section {
+    background: var(--verde-profondo);
+    padding: 8rem 6rem;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 8rem;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-section::before {
+    content: 'SEMPREVERDE';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-5deg);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 10rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.03);
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .about-portrait { position: relative; }
+
+  .portrait-frame {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: linear-gradient(145deg, var(--verde-medio), var(--verde-profondo));
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .portrait-initials {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 8rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.15);
+    font-style: italic;
+  }
+
+  .portrait-badge {
+    position: absolute;
+    bottom: -1rem;
+    right: -1rem;
+    background: var(--oro);
+    color: var(--verde-profondo);
+    padding: 1.5rem;
+    border-radius: 2px;
+    text-align: center;
+  }
+
+  .portrait-badge-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .portrait-badge-text {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 0.2rem;
+  }
+
+  .about-content { position: relative; z-index: 2; }
+
+  .about-tag {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--oro-chiaro);
+    margin-bottom: 1.5rem;
+  }
+
+  .about-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--panna);
+    line-height: 1.15;
+    margin-bottom: 2rem;
+  }
+
+  .about-title em { font-style: italic; color: var(--verde-menta); }
+
+  .about-text {
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: rgba(245,240,232,0.65);
+    margin-bottom: 1.5rem;
+  }
+
+  .about-firma {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--oro-chiaro);
+    margin-top: 2.5rem;
+  }
+
+  /* PROCESS */
+  .process-section {
+    padding: 8rem 6rem;
+    background: #eee9df;
+  }
+
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 5rem;
+    position: relative;
+  }
+
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--verde-chiaro), transparent);
+  }
+
+  .process-step {
+    padding: 0 2rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .step-dot {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #eee9df;
+    border: 2px solid var(--verde-chiaro);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: var(--verde-chiaro);
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s;
+  }
+
+  .process-step:hover .step-dot {
+    background: var(--verde-profondo);
+    color: var(--panna);
+    border-color: var(--verde-profondo);
+  }
+
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--verde-profondo);
+    margin-bottom: 0.8rem;
+  }
+
+  .step-text {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--verde-profondo);
+    opacity: 0.6;
+  }
+
+  /* TESTIMONIALS */
+  .testimonials {
+    padding: 8rem 6rem;
+    background: var(--panna);
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 5rem;
+  }
+
+  .testimonial-card {
+    background: #fff;
+    padding: 2.5rem;
+    border-radius: 4px;
+    border: 1px solid rgba(26,58,42,0.08);
+    position: relative;
+    transition: all 0.3s;
+  }
+
+  .testimonial-card:hover {
+    box-shadow: 0 16px 48px rgba(26,58,42,0.1);
+    transform: translateY(-4px);
+  }
+
+  .testimonial-stars {
+    color: var(--oro);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.2rem;
+  }
+
+  .testimonial-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--verde-profondo);
+    margin-bottom: 1.5rem;
+  }
+
+  .testimonial-quote {
+    position: absolute;
+    top: 1.5rem;
+    right: 2rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    font-weight: 300;
+    color: var(--verde-chiaro);
+    opacity: 0.1;
+    line-height: 1;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    border-top: 1px solid rgba(26,58,42,0.08);
+    padding-top: 1.2rem;
+  }
+
+  .author-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--verde-menta);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--verde-profondo);
+    flex-shrink: 0;
+  }
+
+  .author-name {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--verde-profondo);
+  }
+
+  .author-location {
+    font-size: 0.78rem;
+    color: var(--verde-profondo);
+    opacity: 0.5;
+  }
+
+  /* CTA */
+  .cta-section {
+    background: var(--verde-profondo);
+    padding: 8rem 6rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: -100px; left: -100px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(74,140,94,0.15), transparent 70%);
+  }
+
+  .cta-section::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; right: -100px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.1), transparent 70%);
+  }
+
+  .cta-tag {
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--oro-chiaro);
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 300;
+    color: var(--panna);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .cta-title em { font-style: italic; color: var(--verde-menta); }
+
+  .cta-sub {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: rgba(245,240,232,0.55);
+    max-width: 500px;
+    margin: 0 auto 3rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
+  }
+
+  .btn-gold {
+    background: var(--oro);
+    color: var(--verde-profondo);
+    padding: 1.1rem 3rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  .btn-gold:hover { background: var(--oro-chiaro); transform: translateY(-2px); }
+
+  .btn-outline-light {
+    background: transparent;
+    color: var(--panna);
+    padding: 1.1rem 3rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid rgba(245,240,232,0.3);
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  .btn-outline-light:hover { border-color: var(--panna); background: rgba(245,240,232,0.05); }
+
+  /* FOOTER */
+  footer {
+    background: #0f2218;
+    padding: 4rem 6rem 2rem;
+    color: rgba(245,240,232,0.5);
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 4rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    margin-bottom: 2rem;
+  }
+
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--panna);
+    margin-bottom: 1rem;
+  }
+
+  .footer-brand span { color: var(--verde-pallido); font-style: italic; }
+
+  .footer-tagline { font-size: 0.85rem; line-height: 1.7; margin-bottom: 1.5rem; }
+
+  .footer-contact-item { font-size: 0.82rem; margin-bottom: 0.4rem; }
+
+  .footer-heading {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--verde-pallido);
+    margin-bottom: 1.2rem;
+    font-weight: 500;
+  }
+
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 0.6rem; }
+  .footer-links a {
+    text-decoration: none;
+    font-size: 0.85rem;
+    color: rgba(245,240,232,0.45);
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--panna); }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.78rem;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .animate { animation: fadeInUp 0.8s ease forwards; }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.5s; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">Sempre<span>verde</span></div>
+  <ul class="nav-links">
+    <li><a href="#servizi">Servizi</a></li>
+    <li><a href="#chi-siamo">Chi Siamo</a></li>
+    <li><a href="#processo">Processo</a></li>
+    <li><a href="#recensioni">Recensioni</a></li>
+    <li><a href="#contatti" class="nav-cta">Contattaci</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-badge animate">Giardinaggio Professionale · Piemonte</div>
+    <h1 class="hero-title animate delay-1">
+      Il tuo giardino,<br>
+      <em>curato con passione</em>
+    </h1>
+    <p class="hero-subtitle animate delay-2">Progettazione · Manutenzione · Disinfestazione</p>
+    <p class="hero-desc animate delay-3">
+      Trasformiamo ogni spazio verde in un luogo di bellezza e armonia. Dalla progettazione alla cura quotidiana, la nostra esperienza è al servizio del tuo giardino dei sogni.
+    </p>
+    <div class="hero-actions animate delay-4">
+      <a href="#contatti" class="btn-primary">Richiedi un Preventivo</a>
+      <a href="#servizi" class="btn-secondary">Scopri i servizi →</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-img-container">
+      <div class="hero-img-bg"></div>
+      <div class="hero-botanical">
+        <svg class="leaf-art" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M200 450 C200 450 80 350 60 220 C40 90 120 20 200 10 C280 20 360 90 340 220 C320 350 200 450 200 450Z" fill="rgba(74,140,94,0.35)" stroke="rgba(143,188,143,0.4)" stroke-width="1.5"/>
+          <path d="M200 450 C200 400 200 350 200 10" stroke="rgba(143,188,143,0.5)" stroke-width="1" stroke-dasharray="4,8"/>
+          <path d="M200 150 C170 130 130 125 100 130" stroke="rgba(143,188,143,0.3)" stroke-width="0.8"/>
+          <path d="M200 190 C160 165 110 162 75 170" stroke="rgba(143,188,143,0.3)" stroke-width="0.8"/>
+          <path d="M200 230 C155 202 100 200 62 210" stroke="rgba(143,188,143,0.3)" stroke-width="0.8"/>
+          <path d="M200 270 C158 240 108 238 70 250" stroke="rgba(143,188,143,0.3)" stroke-width="0.8"/>
+          <path d="M200 310 C163 280 118 278 85 292" stroke="rgba(143,188,143,0.3)" stroke-width="0.8"/>
+          <path d="M200 150 C230 130 270 125 300 130" stroke="rgba(143,188,143,0.3)" stroke-width="0.8"/>
+          <path d="M200 190 C240 165 290 162 325 170" stroke="rgba(143,188,143,0.3)" stroke-width="0.8"/>
+          <path d="M200 230 C245 202 300 200 338 210" stroke="rgba(143,188,143,0.3)" stroke-width="0.8"/>
+          <path d="M200 270 C242 240 292 238 330 250" stroke="rgba(143,188,143,0.3)" stroke-width="0.8"/>
+          <path d="M200 310 C237 280 282 278 315 292" stroke="rgba(143,188,143,0.3)" stroke-width="0.8"/>
+          <ellipse cx="130" cy="80" rx="25" ry="45" transform="rotate(-30 130 80)" fill="rgba(45,92,63,0.4)" stroke="rgba(143,188,143,0.3)" stroke-width="1"/>
+          <ellipse cx="270" cy="80" rx="25" ry="45" transform="rotate(30 270 80)" fill="rgba(45,92,63,0.4)" stroke="rgba(143,188,143,0.3)" stroke-width="1"/>
+          <ellipse cx="95" cy="200" rx="18" ry="35" transform="rotate(-50 95 200)" fill="rgba(74,140,94,0.3)" stroke="rgba(143,188,143,0.25)" stroke-width="1"/>
+          <ellipse cx="305" cy="200" rx="18" ry="35" transform="rotate(50 305 200)" fill="rgba(74,140,94,0.3)" stroke="rgba(143,188,143,0.25)" stroke-width="1"/>
+          <circle cx="200" cy="60" r="30" fill="none" stroke="rgba(201,168,76,0.25)" stroke-width="1" stroke-dasharray="3,6"/>
+          <circle cx="200" cy="60" r="18" fill="rgba(201,168,76,0.12)"/>
+          <circle cx="200" cy="60" r="4" fill="rgba(201,168,76,0.5)"/>
+          <circle cx="200" cy="150" r="3" fill="rgba(143,188,143,0.4)"/>
+          <circle cx="200" cy="230" r="3" fill="rgba(143,188,143,0.4)"/>
+          <circle cx="200" cy="310" r="3" fill="rgba(143,188,143,0.4)"/>
+          <text x="200" y="480" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="11" fill="rgba(255,255,255,0.3)" letter-spacing="8" font-style="italic">sempreverde</text>
+        </svg>
+      </div>
+      <div class="hero-year">2010</div>
+    </div>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num">15+</div>
+    <div class="stat-label">Anni di Esperienza</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">500+</div>
+    <div class="stat-label">Giardini Curati</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">98%</div>
+    <div class="stat-label">Clienti Soddisfatti</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">4.9★</div>
+    <div class="stat-label">Valutazione Google</div>
+  </div>
+</div>
+
+<section class="section" id="servizi">
+  <div class="section-header">
+    <div>
+      <div class="section-tag">I Nostri Servizi</div>
+      <h2 class="section-title">Tutto ciò di cui il tuo <em>giardino ha bisogno</em></h2>
+    </div>
+    <p class="section-desc">
+      Offriamo una gamma completa di servizi per la cura e la valorizzazione degli spazi verdi privati e commerciali in tutta la provincia di Vercelli e dintorni.
+    </p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 56 56" fill="none">
+        <path d="M28 8C18 8 10 16 10 26C10 36 18 48 28 48C38 48 46 36 46 26C46 16 38 8 28 8Z" stroke="currentColor" stroke-width="1.5" fill="rgba(74,140,94,0.1)"/>
+        <path d="M28 48V28M28 28C28 18 18 12 18 12M28 28C28 18 38 12 38 12" stroke="currentColor" stroke-width="1.5"/>
+      </svg>
+      <div class="service-num">01</div>
+      <h3 class="service-name">Progettazione Giardini</h3>
+      <p class="service-text">Creiamo spazi verdi su misura per ogni esigenza, valorizzando l'ambiente circostante con soluzioni estetiche e funzionali.</p>
+    </div>
+
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 56 56" fill="none">
+        <rect x="10" y="32" width="36" height="8" rx="2" stroke="currentColor" stroke-width="1.5" fill="rgba(74,140,94,0.1)"/>
+        <path d="M20 32V20C20 16 24 14 28 14C32 14 36 16 36 20V32" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M14 32L14 44M42 32L42 44" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <div class="service-num">02</div>
+      <h3 class="service-name">Manutenzione Ordinaria</h3>
+      <p class="service-text">Taglio erba, potatura siepi, concimazione e irrigazione. Il tuo giardino sempre in perfette condizioni durante tutto l'anno.</p>
+    </div>
+
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 56 56" fill="none">
+        <circle cx="28" cy="28" r="16" stroke="currentColor" stroke-width="1.5" fill="rgba(74,140,94,0.1)"/>
+        <path d="M28 12V8M28 48V44M12 28H8M48 28H44" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M18 18L15 15M41 41L38 38M38 18L41 15M18 38L15 41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <div class="service-num">03</div>
+      <h3 class="service-name">Disinfestazione</h3>
+      <p class="service-text">Trattamenti professionali contro parassiti, infestanti e malattie delle piante. Prodotti omologati nel rispetto dell'ambiente.</p>
+    </div>
+
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 56 56" fill="none">
+        <path d="M10 42L28 14L46 42" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        <path d="M16 34H40" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M28 14C28 14 22 24 28 30C34 24 28 14 28 14Z" fill="rgba(74,140,94,0.2)" stroke="currentColor" stroke-width="1"/>
+      </svg>
+      <div class="service-num">04</div>
+      <h3 class="service-name">Potatura Alberi</h3>
+      <p class="service-text">Potatura professionale di alberi ad alto fusto, abbattimenti controllati e smaltimento del materiale di risulta.</p>
+    </div>
+
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 56 56" fill="none">
+        <path d="M10 46C10 36 18 28 28 28C38 28 46 36 46 46" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M28 28V14" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="28" cy="10" r="4" stroke="currentColor" stroke-width="1.5" fill="rgba(74,140,94,0.2)"/>
+        <path d="M20 40C20 36 24 34 28 34C32 34 36 36 36 40" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+      </svg>
+      <div class="service-num">05</div>
+      <h3 class="service-name">Impianti di Irrigazione</h3>
+      <p class="service-text">Progettazione e installazione di sistemi d'irrigazione automatici per ottimizzare il consumo idrico e garantire la salute delle piante.</p>
+    </div>
+
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 56 56" fill="none">
+        <rect x="8" y="22" width="40" height="26" rx="2" stroke="currentColor" stroke-width="1.5" fill="rgba(74,140,94,0.1)"/>
+        <path d="M16 22V16C16 12 20 8 28 8C36 8 40 12 40 16V22" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M22 34L26 38L34 30" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <div class="service-num">06</div>
+      <h3 class="service-name">Prati & Semina</h3>
+      <p class="service-text">Creazione di nuovi prati, risemina di aree deteriorate e trattamenti specifici per un manto erboso sempre verde e rigoglioso.</p>
+    </div>
+  </div>
+</section>
+
+<section class="about-section" id="chi-siamo">
+  <div class="about-portrait">
+    <div class="portrait-frame">
+      <div class="portrait-initials">FG</div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(to top,rgba(26,58,42,0.9),transparent);"></div>
+      <div style="position:absolute;bottom:1.5rem;left:1.5rem;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;color:var(--panna);">Federico Galantucci</div>
+        <div style="font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--verde-menta);opacity:0.7;margin-top:0.3rem;">Fondatore & Giardiniere Capo</div>
+      </div>
+    </div>
+    <div class="portrait-badge">
+      <div class="portrait-badge-num">15+</div>
+      <div class="portrait-badge-text">Anni di<br>Passione</div>
+    </div>
+  </div>
+
+  <div class="about-content">
+    <div class="about-tag">Chi Siamo</div>
+    <h2 class="about-title">Una storia di <em>amore per la natura</em></h2>
+    <p class="about-text">
+      Sempreverde nasce dalla passione di Federico Galantucci per il mondo del verde. Cresciuto in Piemonte, Federico ha trasformato la sua vocazione in una professione d'eccellenza, dedicando oltre 15 anni alla cura e alla valorizzazione degli spazi verdi.
+    </p>
+    <p class="about-text">
+      Ogni giardino racconta una storia. Il nostro lavoro è ascoltarla e aiutarla a fiorire. Con competenza tecnica, strumenti professionali e un profondo rispetto per i ritmi della natura, offriamo soluzioni personalizzate per privati e aziende.
+    </p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem;">
+      <div style="border-left:2px solid var(--verde-chiaro);padding-left:1.2rem;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--verde-menta);margin-bottom:0.3rem;">Certificazioni</div>
+        <div style="font-size:0.82rem;color:rgba(245,240,232,0.5);line-height:1.7;">Fitosanitario professionista · Arboricoltura certificata</div>
+      </div>
+      <div style="border-left:2px solid var(--oro);padding-left:1.2rem;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--oro-chiaro);margin-bottom:0.3rem;">Zona di Lavoro</div>
+        <div style="font-size:0.82rem;color:rgba(245,240,232,0.5);line-height:1.7;">Vercelli · Novara · Torino e provincia</div>
+      </div>
+    </div>
+    <div class="about-firma">— Federico Galantucci</div>
+  </div>
+</section>
+
+<section class="process-section" id="processo">
+  <div style="text-align:center;max-width:600px;margin:0 auto;">
+    <div class="section-tag" style="justify-content:center;">Come Lavoriamo</div>
+    <h2 class="section-title">Il nostro <em>processo</em></h2>
+  </div>
+
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="step-dot">1</div>
+      <h3 class="step-title">Sopralluogo</h3>
+      <p class="step-text">Veniamo da te per valutare lo spazio, ascoltare le tue esigenze e comprendere la tua visione del giardino ideale.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-dot">2</div>
+      <h3 class="step-title">Progetto</h3>
+      <p class="step-text">Elaboriamo un piano personalizzato con preventivo dettagliato, senza costi nascosti e con tempi certi.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-dot">3</div>
+      <h3 class="step-title">Realizzazione</h3>
+      <p class="step-text">Il nostro team qualificato lavora con professionalità, rispettando il tuo spazio e i tuoi tempi.</p>
+    </div>
+    <div class="process-step">
+      <div class="step-dot">4</div>
+      <h3 class="step-title">Cura Continua</h3>
+      <p class="step-text">Offriamo contratti di manutenzione periodica per mantenere il tuo giardino sempre al suo meglio.</p>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials" id="recensioni">
+  <div class="section-header">
+    <div>
+      <div class="section-tag">Recensioni</div>
+      <h2 class="section-title">Cosa dicono i <em>nostri clienti</em></h2>
+    </div>
+    <p class="section-desc">Oltre 500 clienti soddisfatti in Piemonte. Ecco alcune delle loro esperienze con Sempreverde.</p>
+  </div>
+
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="testimonial-quote">"</div>
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">Federico ha trasformato il nostro giardino in qualcosa di straordinario. Professionale, puntuale e con un occhio estetico davvero raro. Lo consiglio a tutti.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">MR</div>
+        <div>
+          <div class="author-name">Marco Rossetti</div>
+          <div class="author-location">Vercelli</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote">"</div>
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">Servizio di disinfestazione impeccabile. Hanno risolto un problema serio con piante infestanti in modo rapido ed efficace. Prezzo onesto e personale gentilissimo.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">LA</div>
+        <div>
+          <div class="author-name">Laura Anselmi</div>
+          <div class="author-location">Novara</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-quote">"</div>
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">Siamo clienti da tre anni per la manutenzione mensile del nostro giardino aziendale. Sempre presenti, sempre precisi. Un servizio di cui non potremmo fare a meno.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">GB</div>
+        <div>
+          <div class="author-name">Giovanni Berta</div>
+          <div class="author-location">Torino</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section" id="contatti">
+  <div class="cta-tag">Inizia Oggi</div>
+  <h2 class="cta-title">Pronto a trasformare<br>il tuo <em>spazio verde</em>?</h2>
+  <p class="cta-sub">Contattaci per un sopralluogo gratuito e senza impegno. Siamo a Vercelli e operiamo in tutto il Piemonte.</p>
+  <div class="cta-buttons">
+    <button class="btn-gold">📞 Chiama Ora</button>
+    <button class="btn-outline-light">✉ Scrivi un Messaggio</button>
+  </div>
+  <div style="margin-top:4rem;display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;max-width:700px;margin-left:auto;margin-right:auto;position:relative;z-index:2;">
+    <div style="text-align:center;">
+      <div style="font-size:1.8rem;margin-bottom:0.5rem;">📍</div>
+      <div style="font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--verde-menta);margin-bottom:0.3rem;">Sede</div>
+      <div style="font-size:0.9rem;color:rgba(245,240,232,0.6);">Vercelli, Piemonte</div>
+    </div>
+    <div style="text-align:center;">
+      <div style="font-size:1.8rem;margin-bottom:0.5rem;">🕐</div>
+      <div style="font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--verde-menta);margin-bottom:0.3rem;">Orari</div>
+      <div style="font-size:0.9rem;color:rgba(245,240,232,0.6);">Lun–Sab, 8:00–18:00</div>
+    </div>
+    <div style="text-align:center;">
+      <div style="font-size:1.8rem;margin-bottom:0.5rem;">⚡</div>
+      <div style="font-size:0.75rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--verde-menta);margin-bottom:0.3rem;">Risposta</div>
+      <div style="font-size:0.9rem;color:rgba(245,240,232,0.6);">Entro 24 ore</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">Sempre<span>verde</span></div>
+      <p class="footer-tagline">Cura professionale degli spazi verdi in Piemonte. Dalla progettazione alla manutenzione, con passione e competenza.</p>
+      <div class="footer-contact-item">📧 info@sempreverde-galantucci.it</div>
+      <div class="footer-contact-item">📞 +39 XXX XXX XXXX</div>
+    </div>
+    <div>
+      <div class="footer-heading">Servizi</div>
+      <ul class="footer-links">
+        <li><a href="#">Progettazione</a></li>
+        <li><a href="#">Manutenzione</a></li>
+        <li><a href="#">Disinfestazione</a></li>
+        <li><a href="#">Potatura</a></li>
+        <li><a href="#">Irrigazione</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Azienda</div>
+      <ul class="footer-links">
+        <li><a href="#">Chi Siamo</a></li>
+        <li><a href="#">Recensioni</a></li>
+        <li><a href="#">Portfolio</a></li>
+        <li><a href="#">Contatti</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Zona</div>
+      <ul class="footer-links">
+        <li><a href="#">Vercelli</a></li>
+        <li><a href="#">Novara</a></li>
+        <li><a href="#">Torino</a></li>
+        <li><a href="#">Biella</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Sempreverde di Federico Galantucci · P.IVA XXXXXXXXXX</span>
+    <span>Privacy Policy · Cookie Policy</span>
+  </div>
+</footer>
+
+</body>
+</html>
